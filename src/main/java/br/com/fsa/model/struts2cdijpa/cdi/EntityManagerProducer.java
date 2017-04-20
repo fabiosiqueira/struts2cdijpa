@@ -2,13 +2,14 @@ package br.com.fsa.model.struts2cdijpa.cdi;
 
 import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -20,10 +21,10 @@ public class EntityManagerProducer implements Serializable {
     @PersistenceUnit(unitName = "modelPU")
     private EntityManagerFactory emf;
     @Inject
-    private LoggerManager logger;
+    private Logger logger;
 
     @Produces
-    @RequestScoped
+    @Dependent
     public EntityManager gerarEM() {
         logger.info("Abrindo Entity Manager");
         return emf.createEntityManager();

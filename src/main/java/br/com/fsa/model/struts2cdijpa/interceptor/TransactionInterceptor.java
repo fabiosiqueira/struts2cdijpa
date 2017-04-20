@@ -1,11 +1,11 @@
 package br.com.fsa.model.struts2cdijpa.interceptor;
 
 import br.com.fsa.model.struts2cdijpa.annotations.TransactionDebugger;
-import br.com.fsa.model.struts2cdijpa.cdi.LoggerManager;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -16,7 +16,7 @@ import javax.interceptor.InvocationContext;
 public class TransactionInterceptor {
 
     @Inject
-    private LoggerManager logger;
+    private Logger logger;
 
     @AroundInvoke
     public Object runInTransaction(InvocationContext invocationContext) throws Exception {
