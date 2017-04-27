@@ -15,13 +15,10 @@ public class MyAppWebListener implements ServletContextListener {
 
     @Inject
     private Logger log;
-    @Inject
-    private MySingletonObj mySingletonObj;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         log.info("App Inicializado - contextInitialized");
-        mySingletonObj.exec();
     }
 
     @Override

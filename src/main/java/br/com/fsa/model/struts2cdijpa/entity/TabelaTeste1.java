@@ -1,8 +1,12 @@
 package br.com.fsa.model.struts2cdijpa.entity;
 
+import br.com.fsa.model.struts2cdijpa.type.Tipo;
+import br.com.fsa.model.struts2cdijpa.usertype.TipoConverter;
+import br.com.fsa.model.struts2cdijpa.usertype.TipoType;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.TypeDef;
 
 /**
  *
@@ -22,6 +27,7 @@ import javax.validation.constraints.Size;
 @Table(name = "TabelaTeste1", catalog = "", schema = "MODEL")
 @NamedQueries({
     @NamedQuery(name = "TabelaTeste1.findAll", query = "SELECT t FROM TabelaTeste1 t")})
+@TypeDef(name = "unitType", typeClass = TipoType.class)
 public class TabelaTeste1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +41,12 @@ public class TabelaTeste1 implements Serializable {
     @Column(name = "DATA")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar data;
+    @Column(name = "Tipo")
+    //@Enumerated(EnumType.STRING)
+//    @Type(type = "unitType")
+//    @Type(type = "br.com.fsa.model.struts2cdijpa.usertype.TipoType")
+    @Convert( converter = TipoConverter.class )
+    private Tipo tipo;
 
     public TabelaTeste1() {
     }
@@ -65,6 +77,14 @@ public class TabelaTeste1 implements Serializable {
 
     public void setData(Calendar data) {
         this.data = data;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     @Override
